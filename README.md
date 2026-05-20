@@ -11,7 +11,7 @@ Docker image with common dependencies for Ganex deploy pipelines.
 |-----|--------|------|---------|------------|-----------|
 | `v1.0` | 3.16 | v3.15.0 | v1.30.0 | 20.x | 0.7.0 |
 
-Helm plugins: `helm-s3`, `helm-diff` (v3.15.7), `helm-push`
+Helm plugins: `helm-s3`, `helm-diff` (v3.12.5), `helm-push`
 
 Other packages: `aws-cli`, `bash`, `curl`, `zip`, `git`, `python3`, `requests`
 

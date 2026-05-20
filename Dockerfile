@@ -5,7 +5,7 @@ LABEL org.opencontainers.image.title="k8s-jenkins-toolbox" \
   org.opencontainers.image.source="https://github.com/ganexcloud/docker-k8s-jenkins-toolbox"
 
 ARG HELM_VERSION="v3.15.0"
-ARG HELM_DIFF_VERSION="3.15.7"
+ARG HELM_DIFF_VERSION="3.12.5"
 ARG KUBECTL_VERSION="v1.30.0"
 ARG GIT_CRYPT_VERSION="0.7.0"
 ARG TARGETOS
