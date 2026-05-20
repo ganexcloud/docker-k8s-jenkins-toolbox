@@ -14,8 +14,8 @@ This repository uses independent SemVer starting from `v1.0.0`.
 
 | Branch | Purpose |
 |---|---|
-| `main` | Base — receives all changes via PR before release |
-| `v1.0`, `v1.1`... | Version branches — source for GitHub Releases |
+| `main` | Single development branch — all changes via PR, all releases tagged from here |
+| `release/vX.x` | Maintenance branch — created on demand when patching an older version |
 
 ## CI behavior
 
@@ -37,31 +37,27 @@ git checkout -b feat/upgrade-components
 
 # 3. Push and open a Pull Request targeting main
 git push origin feat/upgrade-components
-# GitHub Actions validates the build automatically on the PR
+# GitHub Actions validates the build on the PR (no DockerHub push)
 
-# 4. After merge, create the version branch from main
-git checkout main && git pull
-git checkout -b v1.1
-git push origin v1.1
-
-# 5. Create a GitHub Release targeting the version branch
-gh release create v1.1.0 --target v1.1 --title "v1.1.0" --notes "..."
+# 4. After merge, create a GitHub Release targeting main
+gh release create v1.1.0 --target main --title "v1.1.0" --notes "..."
 # GitHub Actions builds multi-platform and pushes to DockerHub automatically
 ```
 
 ## Patching an older version
 
 ```bash
-# 1. Create a fix branch from the version branch
-git checkout v1.0
+# 1. Create a maintenance branch from the tag
+git checkout -b release/v1.x v1.0.0
+
+# 2. Create a fix branch and open a PR targeting release/v1.x
 git checkout -b fix/description
 git commit -m "fix: description"
 git push origin fix/description
+# Open PR targeting release/v1.x
 
-# 2. Open a PR targeting the version branch (e.g. v1.0), not main
-
-# 3. After merge, create a GitHub Release
-gh release create v1.0.1 --target v1.0 --title "v1.0.1" --notes "..."
+# 3. After merge, create a GitHub Release targeting the maintenance branch
+gh release create v1.0.1 --target release/v1.x --title "v1.0.1" --notes "..."
 
 # 4. Cherry-pick to main if relevant for future versions
 git checkout main && git cherry-pick <commit-hash>
