@@ -13,8 +13,7 @@ ARG TARGETARCH
 # Install dependencies
 RUN set -ex \
     && apk update -qq \
-    && apk add --no-cache curl bash zip git py-pip git-crypt docker-cli docker-cli-buildx \
-    && pip3 install --break-system-packages 'awscli<2' requests
+    && apk add --no-cache curl bash zip git aws-cli py3-requests git-crypt docker-cli docker-cli-buildx
 
 # Install Helm
 RUN set -ex \
